@@ -1,7 +1,7 @@
 import React from 'react';
 
 function Filter(props) {
-  function renderOptionsList(item, onChangeCallback) {
+  const renderOptionsList = (item, onChangeCallback) => {
     const { options } = item;
 
     return (
@@ -23,44 +23,42 @@ function Filter(props) {
         </select>
       </div>
     );
-  }
+  };
 
-  function renderBoolean(item, onChangeCallback) {
-    return (
-      <div>
-        <div>{item.title}</div>
-        <input
-          type="checkbox"
-          checked={item.value}
-          onChange={(e) => {
-            onChangeCallback({
-              value: e.target.checked,
-              type: item.type
-            });
-          }}
-        />
-      </div>
-    );
-  }
+  const renderBoolean = (item, onChangeCallback) => (
+    <div>
+      <div>{item.title}</div>
+      <input
+        type="checkbox"
+        checked={item.value}
+        onChange={(e) => {
+          onChangeCallback({
+            value: e.target.checked,
+            type: item.type
+          });
+        }}
+      />
+    </div>
+  );
 
-  function renderRange(item, onChangeCallback) {
-    function onMinRangeChange(e, valueObj) {
-      const newValue = {...valueObj};
+  const renderRange = (item, onChangeCallback) => {
+    const onMinRangeChange = (e, valueObj) => {
+      const newValue = { ...valueObj };
       newValue.min = e.target.value;
       onChangeCallback({
         value: valueObj,
         type: item.type
       });
-    }
+    };
 
-    function onMaxRangeChange(e, valueObj) {
-      const newValue = {...valueObj};
+    const onMaxRangeChange = (e, valueObj) => {
+      const newValue = { ...valueObj };
       newValue.max = e.target.value;
       onChangeCallback({
         value: valueObj,
         type: item.type
       });
-    }
+    };
 
     return (
       <div>
@@ -90,9 +88,9 @@ function Filter(props) {
         </form>
       </div>
     );
-  }
+  };
 
-  function getFilter(props) {
+  const getFilter = (props) => {
     const { item, onChangeCallback } = props;
 
     switch (item.type) {
@@ -109,7 +107,7 @@ function Filter(props) {
       default:
         return <div />;
     }
-  }
+  };
 
   return (
     <div>

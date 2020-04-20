@@ -23,14 +23,14 @@ function ShopView() {
   const itemsPerPage = constants.ITEMS_PER_PAGE;
   const dispatch = useDispatch();
 
-  function getVisibleItems(items, itemsPerPage, currentPage = 1) {
+  const getVisibleItems = (items, itemsPerPage, currentPage = 1) => {
     const firstItemIndex = itemsPerPage * (currentPage - 1);
     const lastItemIndex = firstItemIndex + itemsPerPage;
 
     return items.slice(firstItemIndex, lastItemIndex);
-  }
+  };
 
-  function getFilteredItems(items, filters = [], applyFilters = false) {
+  const getFilteredItems = (items, filters = [], applyFilters = false) => {
     if (!applyFilters) return items;
 
     return filters.reduce((allItems, filter) => {
@@ -49,7 +49,7 @@ function ShopView() {
           return allItems;
       }
     }, items);
-  }
+  };
 
   useEffect(() => {
     api.getPonies().then((data) => {
